@@ -1,4 +1,4 @@
-//Purpose: Continually take data from shift registers and store somewhere`
+//Purpose: Repeatedly charge and discharge a number of batteries, periodically measuring their voltages and sending that data over serial
 
 #include "LowPower.h"
 
@@ -78,10 +78,12 @@ void handleBatteries()
         if (batt.voltage > upper_voltage_threshold)
         {
             batt.mode = 2; //discharge
+            Serial.println("Batt "+String(i)+" is now DISCHARGING");
         }
         if (batt.voltage < lower_voltage_threshold)
         {
             batt.mode = 1; //charge
+            Serial.println("Batt "+String(i)+" is now CHARGING");
         }
 
         battery_list[i] = batt;
